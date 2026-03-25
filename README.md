@@ -11,6 +11,7 @@ This repository contains the official implementation of the **Partition-Guided D
 Explainability in **Many-Objective Optimization (MaO)** is often hindered by a "cognitive drought" that occurs when the number of objectives exceeds traditional visualization limits.
 
 **PGDS** bridges this gap by providing a continuous, geometry-aware explainability pipeline. Instead of relying on abstract rules that may lose geometric fidelity, PGDS quantifies how decision variables influence a solution's geometric proximity to automated targets in high-dimensional objective space.
+
 ---
 
 ## 🌟 Key Features
