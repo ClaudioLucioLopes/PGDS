@@ -15,3 +15,9 @@ htmlcov/
 .ipynb_checkpoints/
 *.log
 .DS_Store
+venv/
+ENV/
+env/
+# Specific Tests
+tests/
+

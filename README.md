@@ -1,54 +1,44 @@
-# MLM-DE-MOO Project
 
-Multi-objective optimization project using Minimal Learning Machine for explainability.
+# Partition-Guided Distance Saliency (PGDS)
 
-## Setup
+This repository contains the official implementation of the **Partition-Guided Distance Saliency (PGDS)** framework, as introduced in the paper: 
 
-### Virtual Environment
+> **"Partition-Guided Distance Saliency: Bridging Decision and Objective Spaces in Many-Objective Optimization"**.
 
-A Python virtual environment has been created in the `venv` directory with all required dependencies.
+## 📌 Overview
 
-### Activation
+Explainability in **Many-Objective Optimization (MaO)** is often hindered by a "cognitive drought" that occurs when the number of objectives exceeds traditional visualization limits. 
 
-To activate the virtual environment:
+**PGDS** bridges this gap by providing a continuous, geometry-aware explainability pipeline. Instead of relying on abstract rules that may lose geometric fidelity, PGDS quantifies how decision variables influence a solution's geometric proximity to automated targets in high-dimensional objective space.
+---
 
-```bash
-# On Linux/Mac
-source venv/bin/activate
+## 🌟 Key Features
 
-# On Windows
-venv\Scripts\activate
+* **Geometric Surrogate Modeling**: Utilizes the **Minimal Learning Machine (MLM)** to learn a distance-preserving mapping between decision and objective spaces.
+* **Automated Target Discovery**: Employs **KD-Tree partitioning** to segment the objective landscape and identify local **"Dominating Points"** (local utopias) as automated targets.
+* **Distance-Based Saliency**: Categorizes decision variables as **Drivers** (facilitate convergence) or **Blockers** (hinder progress) based on distance shifts.
+
+---
+
+## 📁 Project Structure
+
+* `RegionExplainer.py`: Core Explainer class handling rule extraction, saliency calculation, and visualization plotting.
+* `PartitionTree.py`: Implements the KD-Tree logic to build explicit partitions and find local ideal points.
+* `KDNode.py`: Storage unit representing a hyperrectangle block in the objective space.
+* `mlm.py` & `mlm_explainability.py`: Implementations of the Minimal Learning Machine for regression and distance explainability.
+* `maskers.py` & `utils.py`: Utilities for generating interpolated masks and handling data arrays.
+* `onnx_runner.py`: Simple runner for handling ONNX model inferences.
+
+---
+
+## 📜 Citation
+
+If you find this work useful in your research, please cite:
+
+```bibtex
+@inproceedings{lopes2026pgds,
+  title={Partition-Guided Distance Saliency: Bridging Decision and Objective Spaces in Many-Objective Optimization},
+  author={Lopes, Cláudio L. and Martins, Flávio V. C. and Wanner, Elizabeth F.},
+  year={2026}
+}
 ```
-
-### Deactivation
-
-To deactivate the virtual environment:
-
-```bash
-deactivate
-```
-
-## Dependencies
-
-The following packages are installed:
-- numpy >= 1.21.0
-- scipy >= 1.7.0
-- scikit-learn >= 1.0.0
-- tqdm >= 4.62.0
-- pymoo >= 0.6.0
-- matplotlib >= 3.4.0
-
-## Running Tests
-
-After activating the virtual environment, you can run the tests:
-
-```bash
-python tests/test_DTLZ1_2.py
-```
-
-## Project Structure
-
-- `mlm_explainability.py` - Main MLM regressor and explainer classes
-- `tests/` - Test files
-- `venv/` - Virtual environment (not tracked in git)
-- `requirements.txt` - Python dependencies

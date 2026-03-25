@@ -47,7 +47,7 @@ def plot_pcp_comparison(Y_all, knee_indices, extreme_indices, knee_target, extre
 
     plt.xlabel("Objective ID")
     plt.ylabel("Objective Value (Minimization)")
-    plt.title("Parallel Coordinate Plot: Automated Region Discovery (WFG3 - 10 Objs)")
+    plt.title("Parallel Coordinate Plot: Region Discovery (WFG3 - 10 Objs)")
     plt.xticks(X_axis)
     plt.grid(True, axis='x', linestyle='--', alpha=0.7)
     
@@ -66,6 +66,60 @@ def plot_pcp_comparison(Y_all, knee_indices, extreme_indices, knee_target, extre
         print(f" -> PCP Visualization saved to {filename}")
     else:
         plt.show()
+
+def plot_pcp_sol_comparison(Y_all, knee_indices, extreme_indices, knee_target, extreme_target, filename=None):
+    """
+    Parallel Coordinate Plot (PCP) comparing the 'Knee Region' vs 'Extreme Region'.
+    Visualizes the 'Cognitive Drought' solution.
+    """
+    n_obj = Y_all.shape[1]
+    X_axis = range(1, n_obj + 1)
+    
+    plt.figure(figsize=(15, 8))
+    
+    # 1. Background (Light Gray)
+    subset_idx = np.random.choice(Y_all.shape[0], size=min(200, Y_all.shape[0]), replace=False)
+    for y in Y_all[subset_idx]:
+        plt.plot(X_axis, y, color='lightgray', alpha=0.3, lw=0.5)
+        
+    # 2. Knee Region (Blue)
+    if len(knee_indices) > 0:
+        knee_bundle = Y_all[knee_indices]
+        for y in knee_bundle:
+            plt.plot(X_axis, y, color='#1f77b4', alpha=0.4, lw=1)
+    # Highlight Knee Target
+    plt.plot(X_axis, knee_target, color='blue', lw=3, marker='o', label='Knee Target (Ideal)')
+
+    # 3. Extreme Region (Red)
+    if len(extreme_indices) > 0:
+        ext_bundle = Y_all[extreme_indices]
+        for y in ext_bundle:
+            plt.plot(X_axis, y, color='#d62728', alpha=0.4, lw=1)
+    # Highlight Extreme Target
+    plt.plot(X_axis, extreme_target, color='red', lw=3, marker='*', markersize=12, label='Extreme Target (Best f10)')
+
+    plt.xlabel("Objective ID")
+    plt.ylabel("Objective Value (Minimization)")
+    plt.title("Parallel Coordinate Plot: Region Discovery (WFG3 - 10 Objs)")
+    plt.xticks(X_axis)
+    plt.grid(True, axis='x', linestyle='--', alpha=0.7)
+    
+    # Custom Legend
+    from matplotlib.lines import Line2D
+    legend_elements = [
+        Line2D([0], [0], color='lightgray', lw=1, label='All Solutions'),
+        Line2D([0], [0], color='blue', lw=3, label='Knee solution (Balanced)'),
+        Line2D([0], [0], color='red', lw=3, label='Extreme solution (Bias f10)')
+    ]
+    plt.legend(handles=legend_elements)
+    
+    if filename:
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        plt.savefig(filename, dpi=300, bbox_inches='tight')
+        print(f" -> PCP Visualization saved to {filename}")
+    else:
+        plt.show()
+
 
 def plot_saliency_comparison(saliency_knee, saliency_extreme, feature_names, filename=None):
     """
@@ -235,6 +289,10 @@ def run_experiment():
                         target_knee, ctx_ext['dominating_point'],
                         filename="experiments/img/wfg3_pcp_v2.svg")
     
+    plot_pcp_sol_comparison(Y, knee_indices, ext_indices, 
+                        y_knee, y_ext,
+                        filename="experiments/img/wfg3_pcp_sol_v2.svg")
+
     plot_saliency_comparison(sal_knee, sal_ext, feat_names, 
                              filename="experiments/img/wfg3_saliency_v2.svg")
 
