@@ -5,7 +5,8 @@ This repository contains the official implementation of the **Partition-Guided D
 
 > **"Partition-Guided Distance Saliency: Bridging Decision and Objective Spaces in Many-Objective Optimization"**.
 
-![Step-by-Step Explanation](experiments/img/step_by_step_explanation_10.svg)
+<!-- ![Step-by-Step Explanation](experiments/img/step_by_step_explanation_10.svg) -->
+<img src="experiments/img/step_by_step_explanation_10.svg" width="200" height="150">
 
 ---
 
