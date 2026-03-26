@@ -5,8 +5,11 @@ This repository contains the official implementation of the **Partition-Guided D
 
 > **"Partition-Guided Distance Saliency: Bridging Decision and Objective Spaces in Many-Objective Optimization"**.
 
+![Step-by-Step Explanation](experiments/img/step_by_step_explanation_10.svg)
+
 ---
-## 📌 Overview
+
+## Overview
 
 Explainability in **Many-Objective Optimization (MaO)** is often hindered by a "cognitive drought" that occurs when the number of objectives exceeds traditional visualization limits.
 
@@ -14,7 +17,7 @@ Explainability in **Many-Objective Optimization (MaO)** is often hindered by a "
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 * **Geometric Surrogate Modeling**: Utilizes the **Minimal Learning Machine (MLM)** to learn a distance-preserving mapping between decision and objective spaces.
 * **Automated Target Discovery**: Employs **KD-Tree partitioning** to segment the objective landscape and identify local **"Dominating Points"** (local utopias) as automated targets.
@@ -22,7 +25,7 @@ Explainability in **Many-Objective Optimization (MaO)** is often hindered by a "
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 * `RegionExplainer.py`: Core Explainer class handling rule extraction, saliency calculation, and visualization plotting.
 * `PartitionTree.py`: Implements the KD-Tree logic to build explicit partitions and find local ideal points.
@@ -33,7 +36,7 @@ Explainability in **Many-Objective Optimization (MaO)** is often hindered by a "
 
 ---
 
-## 📜 Citation
+## Citation
 
 If you find this work useful in your research, please cite:
 
